@@ -29,9 +29,9 @@ export default class Player
     let _animation = {
       key: "idle",
       frames: "idle",
-      frameRate: 10,
+      frameRate: 0,
       yoyo: false,
-      repeat: -1,
+      repeat: 1,
     };
 
     this.anims.create(_animation);
@@ -63,9 +63,9 @@ export default class Player
     _animation = {
       key: "right-jump",
       frames: "right-jump",
-      frameRate: 10,
+      frameRate: 0,
       yoyo: false,
-      repeat: -1,
+      repeat: 1,
     };
 
     this.anims.create(_animation);
@@ -73,44 +73,56 @@ export default class Player
     _animation = {
       key: "left-jump",
       frames: "left-jump",
-      frameRate: 10,
+      frameRate: 0,
       yoyo: false,
-      repeat: -1,
+      repeat: 1,
     };
 
     this.anims.create(_animation);
     this.setDepth(11);
   }
 
-  async update(time: number, delta: number) {
-    if (Phaser.Input.Keyboard.JustDown(this._spacebar)) {
-      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
+  /* public async movePlayer(){
+    if (this._cursors.left.isDown) {
+      
+    } else if (this._cursors.right.isDown) {
+      console.log("right");
+    } else if (this._cursors.up.isDown) {
+      console.log("up");
+    } else if (this._cursors.down.isDown) {
+      console.log("down");
     }
+  } */
 
+  update() {
+    /* if (Phaser.Input.Keyboard.JustDown(this._spacebar)) {
+      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
+    } */
+
+    function delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+// il tipo fluttua e va lento
     if (this._cursors.left.isDown) {
       this.anims.play("left-run", true);
-      this._body.setAccelerationX(-160);
-      this.controlloL = true;
+      this._body.setVelocityX(-300);
     } else if (this._cursors.right.isDown) {
       this.anims.play("right-run", true);
-      this._body.setAccelerationX(160);
-      this.controlloR = true;
-    } else if (
-      this._cursors.up.isDown &&
-      this.controlloL &&
-      this._body.blocked.down
-    ) {
-      this.anims.play("left-jump", true);
-    } else if (
-      this._cursors.up.isDown &&
-      this.controlloR &&
-      this._body.blocked.down
-    ) {
-      this.anims.play("right-jump", true);
-    } else {
+      this._body.setVelocityX(300);
+    }  else {
       this.anims.play("idle", true);
       this.controlloR = false;
       this.controlloL = false;
+      this._body.setVelocityX(0);
     }
+
+    if (this._cursors.up.isDown) {
+      this._body.setAccelerationY(-2500);
+      delay(500).then(() => {
+        this._body.setAccelerationY(-2500);
+      });
+    }
+
+    this._body.setVelocityY(0);
   }
 }
