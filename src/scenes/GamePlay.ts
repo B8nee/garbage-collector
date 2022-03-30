@@ -61,5 +61,7 @@ export default class GamePlay extends Phaser.Scene {
     this.events.emit("update-score", [1]);
   }
 
-  async update() {}
+  async update() {
+    this._player.update();
+  }
 }
