@@ -110,7 +110,7 @@ export default class Player extends Phaser.GameObjects.Sprite implements IPlayer
         this.controlloR = false;
         this.controlloL = false;
       }
-      
+    
       
       
   }
