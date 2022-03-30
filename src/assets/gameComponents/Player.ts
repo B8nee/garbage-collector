@@ -105,13 +105,9 @@ export default class Player extends Phaser.GameObjects.Sprite implements IPlayer
         this.anims.play("right-jump", true);
       }
     else {
-        // dani sei gay <3
         this.anims.play("idle", true);
         this.controlloR = false;
         this.controlloL = false;
       }
-      
-      
-      
   }
 }
