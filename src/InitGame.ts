@@ -23,8 +23,8 @@ window.addEventListener("load", () => {
     physics: {
       default: "arcade",
       arcade: {
-        debug: GameData.globals.debug,
-        gravity: { y: 400 },
+        // debug: GameData.globals.debug,
+        gravity: { y: 1700 },
       },
     },
     input: {
