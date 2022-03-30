@@ -50,5 +50,5 @@ export default class Intro extends Phaser.Scene {
     }
   }
 
-  update() {}
+  async update() {}
 }

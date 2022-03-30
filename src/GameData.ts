@@ -18,7 +18,7 @@ export const GameData: any = {
   spritesheets: [
     {
       name: "idle",
-      path: "assets/images/idle.png",
+      path: "assets/images/player.png",
       width: 32,
       height: 36,
       frames: 1,
@@ -63,6 +63,8 @@ export const GameData: any = {
     { name: "logomenu", path: "assets/images/logomenu.png" },
     { name: "city", path: "assets/images/city.png" },
     { name: "rubbish", path: "assets/images/rubbish.png" },
+    { name: "bag", path: "assets/images/bag.png" },
+    { name: "player", path: "assets/images/player.png"},
   ],
 
   atlas: [],
