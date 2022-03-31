@@ -7,7 +7,7 @@ export default class GamePlay extends Phaser.Scene {
   private _player: Player;
   private _enemyGroup: Phaser.GameObjects.Group;
   private _bagGroup: Phaser.GameObjects.Group;
-
+  private _platform: Phaser.GameObjects.Rectangle;
   constructor() {
     super({ key: "GamePlay" });
   }
@@ -38,8 +38,11 @@ export default class GamePlay extends Phaser.Scene {
       this
     );
 
-    this.add.rectangle(500,530,100,50,0x33cc33,10)
-    this.add.rectangle(290,430,100,50,0x33cc33,10)
+    this._platform = this.add.rectangle(700,600,this.game.canvas.width+120,25,0x33cc33,10).setOrigin(.5)
+
+    
+
+
     
         
   }
