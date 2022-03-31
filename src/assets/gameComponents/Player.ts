@@ -95,14 +95,12 @@ export default class Player
   } */
 
   update() {
-    /* if (Phaser.Input.Keyboard.JustDown(this._spacebar)) {
-      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
-    } */
+     
 
     function delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
     }
-// il tipo fluttua e va lento
+// il tipo fluttua e va lento (aggiustato)
     if (this._cursors.left.isDown) {
       this.anims.play("left-run", true);
       this._body.setVelocityX(-300);
@@ -115,14 +113,15 @@ export default class Player
       this.controlloL = false;
       this._body.setVelocityX(0);
     }
-
-    if (this._cursors.up.isDown) {
-      this._body.setAccelerationY(-2500);
-      delay(500).then(() => {
-        this._body.setAccelerationY(-2500);
+    if (this._cursors.up.isDown && this._body.blocked.down) {
+      this._body.setVelocityY(-600);
+      delay(400).then(() => {
+        this._body.setVelocityY(300);
       });
     }
+    if (this._cursors.space.isDown) {
+      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
+    } 
 
-    this._body.setVelocityY(0);
   }
 }
