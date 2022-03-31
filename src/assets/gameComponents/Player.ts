@@ -82,25 +82,11 @@ export default class Player
     this.setDepth(11);
   }
 
-  /* public async movePlayer(){
-    if (this._cursors.left.isDown) {
-      
-    } else if (this._cursors.right.isDown) {
-      console.log("right");
-    } else if (this._cursors.up.isDown) {
-      console.log("up");
-    } else if (this._cursors.down.isDown) {
-      console.log("down");
-    }
-  } */
-
   update() {
-     
-
     function delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
     }
-// il tipo fluttua e va lento (aggiustato)
+
     if (this._cursors.left.isDown) {
       this.anims.play("left-run", true);
       this._body.setVelocityX(-300);
@@ -111,17 +97,22 @@ export default class Player
       this.anims.play("idle", true);
       this.controlloR = false;
       this.controlloL = false;
+
       this._body.setVelocityX(0);
     }
+
     if (this._cursors.up.isDown && this._body.blocked.down) {
       this._body.setVelocityY(-700);
+
       delay(500).then(() => {
-        this._body.setVelocityY(400);
+        this._body.setVelocityY(0);
       });
     }
-    if (this._cursors.space.isDown) {
-      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
-    } 
 
+    if (this._spacebar.isDown) {
+      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
+      delay(500)
+      
+    } 
   }
 }

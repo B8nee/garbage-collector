@@ -23,15 +23,15 @@ window.addEventListener("load", () => {
     physics: {
       default: "arcade",
       arcade: {
-        // debug: GameData.globals.debug,
         gravity: { y: 1700 },
+        debug: true,
       },
     },
     input: {
       activePointers: 2,
       keyboard: true,
       gamepad: true,
-    },
+    },  
     render: {
       pixelArt: true,
       antialias: false,

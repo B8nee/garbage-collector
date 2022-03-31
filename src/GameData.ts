@@ -64,28 +64,11 @@ export const GameData: any = {
     { name: "city", path: "assets/images/city.png" },
     { name: "rubbish", path: "assets/images/rubbish.png" },
     { name: "bag", path: "assets/images/bag.png" },
-    { name: "player", path: "assets/images/player.png"},
+    { name: "player", path: "assets/images/player.png" },
+    { name: "platform", path: "assets/images/platform.png"},
   ],
 
   atlas: [],
-
-  sounds: [
-    {
-      name: "music0",
-      paths: ["assets/sounds/music0.ogg", "assets/sounds/music0.m4a"],
-      volume: 1,
-      loop: false,
-      frame: 1,
-    },
-  ],
-  audio: [
-    {
-      name: "sfx",
-      jsonpath: "assets/sounds/sfx.json",
-      paths: ["assets/sounds/sfx.ogg", "assets/sounds/sfx.m4a"],
-      instances: 10,
-    },
-  ],
 
   script: [
     {

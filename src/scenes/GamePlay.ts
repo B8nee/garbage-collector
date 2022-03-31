@@ -7,7 +7,7 @@ export default class GamePlay extends Phaser.Scene {
   private _player: Player;
   private _enemyGroup: Phaser.GameObjects.Group;
   private _bagGroup: Phaser.GameObjects.Group;
-  private _platform: Phaser.GameObjects.Rectangle;
+  private _platform: any;
   constructor() {
     super({ key: "GamePlay" });
   }
@@ -30,6 +30,7 @@ export default class GamePlay extends Phaser.Scene {
       y: 550,
       key: "player",
     });
+    this._player = this.physics.add.existing(this._player);
     this.physics.add.collider(
       this._bagGroup,
       this._enemyGroup,
@@ -38,13 +39,13 @@ export default class GamePlay extends Phaser.Scene {
       this
     );
 
-    this._platform = this.add.rectangle(700,600,this.game.canvas.width+120,25,0x33cc33,10).setOrigin(.5)
+    // this._platform = this.add.rectangle(700, 600, this.game.canvas.width + 120, 25, 0x33cc33, 10, );
+    this._platform = this.physics.add.staticGroup();
+
+		this._platform.create(600, 700, 'platform').setScale(0);
 
     
-
-
-    
-        
+    this.physics.add.collider(this._platform,  this._player);
   }
 
   async addBag(bag: Sacchetto) {

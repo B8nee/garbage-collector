@@ -6,12 +6,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite implements IEnemy{
     protected _scene: GamePlay;
     protected _body: Phaser.Physics.Arcade.Body;
 
-    async create() {
-    }
+    async create() {}
 
-    async update(time: number, delta: number) {
-        
-    }
-
-
+    async update(time: number, delta: number) {}
 }
