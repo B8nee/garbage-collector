@@ -37,6 +37,11 @@ export default class GamePlay extends Phaser.Scene {
       undefined,
       this
     );
+
+    this.add.rectangle(500,530,100,50,0x33cc33,10)
+    this.add.rectangle(290,430,100,50,0x33cc33,10)
+    
+        
   }
 
   async addBag(bag: Sacchetto) {
@@ -61,7 +66,9 @@ export default class GamePlay extends Phaser.Scene {
     this.events.emit("update-score", [1]);
   }
 
+
   async update() {
     this._player.update();
+  
   }
 }

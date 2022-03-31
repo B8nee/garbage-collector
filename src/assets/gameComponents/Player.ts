@@ -114,9 +114,9 @@ export default class Player
       this._body.setVelocityX(0);
     }
     if (this._cursors.up.isDown && this._body.blocked.down) {
-      this._body.setVelocityY(-600);
-      delay(400).then(() => {
-        this._body.setVelocityY(300);
+      this._body.setVelocityY(-700);
+      delay(500).then(() => {
+        this._body.setVelocityY(400);
       });
     }
     if (this._cursors.space.isDown) {
