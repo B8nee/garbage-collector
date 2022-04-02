@@ -17,22 +17,21 @@ export default class Boss extends Phaser.GameObjects.Sprite implements IBoss {
     let _animation = {
       key: "idle-boss",
       frames: this.anims.generateFrameNumbers("boss-idle", { frames: [0, 1] }),
-      frameRate: 10,
+      frameRate: 2,
       yoyo: false,
       repeat: -1,
     };
 
     this.anims.create(_animation);
-    this._body.setCollideWorldBounds(true, 0.5);
     this.setDepth(11);
   }
 
   async create() {
     this._scene.tweens.add({ targets: this, alpha: 1, duration: 200 });
     this._scene.addBoss(this);
-    this._scene.add.existing(this);
+    this._body.allowGravity = false;
   }
-  async update(time: number, delta: number) {
-    this.anims.play("idle-boss");
+  async update() {
+    this.anims.play("idle-boss", true);
   }
 }

@@ -8,6 +8,7 @@ import GamePlay from "./scenes/GamePlay";
 import { GameData } from "./GameData";
 import Win from "./scenes/Win";
 import GamePlay2 from "./scenes/GamePlay2";
+import GameWin from "./scenes/GameWin";
 
 window.addEventListener("load", () => {
   const config: any = {
@@ -20,13 +21,23 @@ window.addEventListener("load", () => {
       height: GameData.globals.gameHeight,
     },
 
-    scene: [Boot, Preloader, Intro, Hud, GamePlay, GameOver, Win, GamePlay2],
+    scene: [
+      Boot,
+      Preloader,
+      Intro,
+      Hud,
+      GamePlay,
+      GameOver,
+      Win,
+      GamePlay2,
+      GameWin,
+    ],
 
     physics: {
       default: "arcade",
       arcade: {
         gravity: { y: 1400 },
-        debug: true,
+        debug: false,
       },
     },
     input: {

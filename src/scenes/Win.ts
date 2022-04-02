@@ -25,17 +25,7 @@ export default class Win extends Phaser.Scene {
       .setOrigin(0)
       .setDepth(1001)
       .setOrigin(0.5)
-      .setTint(0x33cc33)
-      .on("pointerup", () => {
-        this.otherintro.removeInteractive();
-        this.intro();
-      })
-      .on("pointerover", () => {
-        this.otherintro.setTint(0x009933);
-      })
-      .on("pointerout", () => {
-        this.otherintro.setTint(0x33cc33);
-      });
+      .setTint(0x33cc33);
 
     this.restart = this.add
       .bitmapText(1280 / 2, 600 / 2, "arcade", "Livello successivo!")
@@ -43,28 +33,22 @@ export default class Win extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive()
       .setDepth(100)
-      .setTint(0xff8200)
+      .setTint(0x33cc33)
       .on("pointerup", async () => {
         this.restart.removeInteractive();
         this.nextLevel();
       })
       .on("pointerover", () => {
-        this.restart.setTint(0xff0000);
+        this.restart.setTint(0x009933);
       })
       .on("pointerout", () => {
-        this.restart.setTint(0xff8200);
+        this.restart.setTint(0x33cc33);
       });
-  }
-
-  async intro() {
-    this.scene.stop("Win");
-    this.scene.start("Intro");
   }
 
   async nextLevel() {
     this.scene.stop("Win");
     this.scene.start("GamePlay2");
-    this.scene.bringToTop("GamePlay2");
     this.scene.start("Hud");
     this.scene.bringToTop("Hud");
   }

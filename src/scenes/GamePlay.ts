@@ -89,6 +89,14 @@ export default class GamePlay extends Phaser.Scene {
       undefined,
       this
     );
+
+    this.physics.add.collider(
+      this._player,
+      this._enemy,
+      this.gameOver,
+      undefined,
+      this
+    );
   }
 
   async addBag(bag: Sacchetto) {
@@ -115,19 +123,25 @@ export default class GamePlay extends Phaser.Scene {
   }
 
   async nextLevel() {
-    this._level++;
     this.scene.stop("GamePlay");
-    this.scene.start("GamePlay2");
+    this.scene.start("Hud");
+    this.scene.start("Win");
   }
 
   async shoot() {
     this.events.emit("decrease-score", [1]);
   }
 
+  async gameOver() {
+    this.scene.start("GameOver");
+    this.scene.stop("GamePlay");
+    this.scene.stop("Hud");
+  }
+
   async update() {
     this._player.update();
-    if (this._contatore == 10) {
-      this.nextLevel();
-    }
+    // if (this._contatore == 10) {
+    //   this.nextLevel();
+    // }
   }
 }

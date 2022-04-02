@@ -10,6 +10,7 @@ export default class Hud extends Phaser.Scene {
   private sacchetto: Phaser.GameObjects.Image;
   private proiettili: number;
   private gamePlay2: GamePlay2;
+  private level: number = 1;
 
   constructor() {
     super({
@@ -64,14 +65,24 @@ export default class Hud extends Phaser.Scene {
     }
 
     if (this.score == 10) {
-      delay(1000).then(() => {
-        this.win();
-      });
+      if (this.level == 1) {
+        delay(1000).then(() => {
+          this.win();
+        });
+      } else {
+        delay(1000).then(() => {
+          this.gameWin();
+        });
+      }
     }
 
     if (this.proiettili == 0) {
       delay(1000).then(() => {
-        this.gameOver();
+        if (this.level == 1) {
+          this.gameOver();
+        } else {
+          this.gameOver();
+        }
       });
     }
   }
@@ -86,6 +97,12 @@ export default class Hud extends Phaser.Scene {
     this.scene.stop("Hud");
     this.scene.stop("GamePlay");
     this.scene.start("GameOver");
+  }
+
+  private async gameWin() {
+    this.scene.stop("Hud");
+    this.scene.stop("GamePlay2");
+    this.scene.start("GameWin");
   }
 
   private async win() {

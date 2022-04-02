@@ -76,6 +76,8 @@ export const GameData: any = {
     { name: "base", path: "assets/images/platform0.png" },
     { name: "platform", path: "assets/images/platform1.png" },
     { name: "stage2", path: "assets/images/stage2.png" },
+    { name: "bgover", path: "assets/images/bgover.png" },
+    { name: "winbg", path: "assets/images/win.png" },
   ],
 
   atlas: [],

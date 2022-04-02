@@ -34,7 +34,7 @@ export default class Sacchetto
     this.setScale(0.05);
     //this._body.setCircle(7, 10, 10);
     this.anims.create(_animation);
-    this.anims.play("bag-shoot");
+    //this.anims.play("bag-shoot");
     this.setAlpha(0).setScale(0.5).setDepth(10);
     this._scene.tweens.add({
       targets: this,

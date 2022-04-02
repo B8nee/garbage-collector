@@ -84,7 +84,7 @@ export default class Player
     this.setDepth(11);
   }
 
-  update() {
+  async update() {
     function delay(ms: number) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     }
