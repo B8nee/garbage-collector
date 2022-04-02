@@ -16,7 +16,7 @@ export default class Intro extends Phaser.Scene {
       "bgmenu"
     );
     this.logomenu = this.add
-      .image(this.game.canvas.width / 2, 225, "logomenu")
+      .image(this.game.canvas.width / 2 + 100, 225, "logomenu")
       .setScale(1.25);
   }
 

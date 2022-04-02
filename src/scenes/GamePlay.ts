@@ -7,7 +7,11 @@ export default class GamePlay extends Phaser.Scene {
   private _player: Player;
   private _enemyGroup: Phaser.GameObjects.Group;
   private _bagGroup: Phaser.GameObjects.Group;
+  private base: any;
   private _platform: any;
+  private _contatore: any;
+  private _enemy: any;
+
   constructor() {
     super({ key: "GamePlay" });
   }
@@ -26,8 +30,8 @@ export default class GamePlay extends Phaser.Scene {
     this._enemyGroup = this.add.group({ runChildUpdate: true });
     this._player = new Player({
       scene: this,
-      x: this.game.canvas.width / 2,
-      y: 550,
+      x: 30,
+      y: 310,
       key: "player",
     });
     this._player = this.physics.add.existing(this._player);
@@ -38,14 +42,53 @@ export default class GamePlay extends Phaser.Scene {
       undefined,
       this
     );
-
-    // this._platform = this.add.rectangle(700, 600, this.game.canvas.width + 120, 25, 0x33cc33, 10, );
+    this.base = this.physics.add.staticGroup();
     this._platform = this.physics.add.staticGroup();
+    this._enemy = this.physics.add.staticGroup();
 
-		this._platform.create(600, 700, 'platform').setScale(0);
+    this.base.create(800, 882, "base").setScale(0);
 
-    
-    this.physics.add.collider(this._platform,  this._player);
+    this._platform.create(42, 402, "platform").setScale(0);
+    this._platform.create(105, 368, "platform").setScale(0);
+    this._platform.create(200, 540, "platform").setScale(0);
+    this._platform.create(289, 400, "platform").setScale(0);
+    this._platform.create(339, 445, "platform").setScale(0);
+    this._platform.create(533, 408, "platform").setScale(0);
+    this._platform.create(585, 374, "platform").setScale(0);
+    this._platform.create(670, 374, "platform").setScale(0);
+    this._platform.create(983, 436, "platform").setScale(0);
+    this._platform.create(1045, 400, "platform").setScale(0);
+    this._platform.create(1110, 400, "platform").setScale(0);
+    this._platform.create(1200, 470, "platform").setScale(0);
+
+    this.physics.add.collider(this.base, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+    this.physics.add.collider(this._platform, this._player);
+
+    this._enemy.create(105, 340, "rubbish");
+    this._enemy.create(200, 515, "rubbish");
+    this._enemy.create(1110, 380, "rubbish");
+    this._enemy.create(339, 420, "rubbish");
+    this._enemy.create(533, 383, "rubbish");
+    this._enemy.create(585, 349, "rubbish");
+    this._enemy.create(670, 349, "rubbish");
+    this._enemy.create(1045, 375, "rubbish");
+    this._enemy.create(983, 411, "rubbish");
+    this._enemy.create(1200, 450, "rubbish");
+
+    this.physics.add.collider(
+      this._bagGroup,
+      this._enemy,
+      this.hitEnemy,
+      undefined,
+      this
+    );
   }
 
   async addBag(bag: Sacchetto) {
@@ -61,7 +104,8 @@ export default class GamePlay extends Phaser.Scene {
   }
 
   async removeEnemy(enemy: Cestino) {
-    this._enemyGroup.remove(enemy, true, true);
+    this._contatore++;
+    this._enemy.remove(enemy, true, true);
   }
 
   async hitEnemy(bag: any, enemy: any) {
@@ -70,9 +114,20 @@ export default class GamePlay extends Phaser.Scene {
     this.events.emit("update-score", [1]);
   }
 
+  async nextLevel() {
+    this._level++;
+    this.scene.stop("GamePlay");
+    this.scene.start("GamePlay2");
+  }
+
+  async shoot() {
+    this.events.emit("decrease-score", [1]);
+  }
 
   async update() {
     this._player.update();
-  
+    if (this._contatore == 10) {
+      this.nextLevel();
+    }
   }
 }

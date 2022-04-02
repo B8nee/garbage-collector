@@ -11,8 +11,10 @@ export default class Player
   private _body: Phaser.Physics.Arcade.Body;
   private _cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   private _spacebar: Phaser.Input.Keyboard.Key;
-  private controlloR: Boolean = false;
-  private controlloL: Boolean = false;
+  private controlloR: Boolean;
+  private controlloL: Boolean;
+  private controlloI: Boolean;
+  private contatoreP: integer = 0;
 
   constructor(params: genericConfig) {
     super(params.scene, params.x, params.y, params.key);
@@ -84,19 +86,26 @@ export default class Player
 
   update() {
     function delay(ms: number) {
-      return new Promise( resolve => setTimeout(resolve, ms) );
+      return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     if (this._cursors.left.isDown) {
       this.anims.play("left-run", true);
       this._body.setVelocityX(-300);
+      this.controlloL = true;
+      this.controlloR = false;
+      this.controlloI = false;
     } else if (this._cursors.right.isDown) {
       this.anims.play("right-run", true);
       this._body.setVelocityX(300);
-    }  else {
+      this.controlloL = false;
+      this.controlloR = true;
+      this.controlloI = false;
+    } else {
       this.anims.play("idle", true);
       this.controlloR = false;
       this.controlloL = false;
+      this.controlloI = true;
 
       this._body.setVelocityX(0);
     }
@@ -109,10 +118,40 @@ export default class Player
       });
     }
 
-    if (this._spacebar.isDown) {
-      new Sacchetto({ scene: this._scene, x: this.x, y: this.y, key: "bag" });
-      delay(500)
-      
-    } 
+    if (Phaser.Input.Keyboard.JustDown(this._cursors.space)) {
+      if (this.controlloI == false) {
+        if (this.contatoreP != 15) {
+          const sacchetto = new Sacchetto(
+            {
+              scene: this._scene,
+              x: this.x,
+              y: this.y,
+              key: "bag",
+            },
+            this.controlloL
+          );
+          sacchetto.create();
+          sacchetto.update();
+          this.contatoreP++;
+          this._scene.shoot();
+        }
+      }
+    } else if (Phaser.Input.Keyboard.JustDown(this._cursors.space)) {
+      if (this.contatoreP != 15) {
+        const sacchetto = new Sacchetto(
+          {
+            scene: this._scene,
+            x: this.x,
+            y: this.y,
+            key: "bag",
+          },
+          this.controlloR
+        );
+        sacchetto.create();
+        sacchetto.update();
+        this.contatoreP++;
+        this._scene.shoot();
+      }
+    }
   }
 }

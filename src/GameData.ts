@@ -55,6 +55,14 @@ export const GameData: any = {
       height: 36,
       frames: 4,
     },
+
+    {
+      name: "boss-idle",
+      path: "assets/images/boss.png",
+      width: 180.59,
+      height: 177,
+      frame: 2,
+    },
   ],
 
   images: [
@@ -65,7 +73,9 @@ export const GameData: any = {
     { name: "rubbish", path: "assets/images/rubbish.png" },
     { name: "bag", path: "assets/images/bag.png" },
     { name: "player", path: "assets/images/player.png" },
-    { name: "platform", path: "assets/images/platform.png"},
+    { name: "base", path: "assets/images/platform0.png" },
+    { name: "platform", path: "assets/images/platform1.png" },
+    { name: "stage2", path: "assets/images/stage2.png" },
   ],
 
   atlas: [],

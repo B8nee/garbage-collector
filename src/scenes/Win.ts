@@ -1,12 +1,12 @@
-export default class GameOver extends Phaser.Scene {
-  private GameOver: Phaser.GameObjects.BitmapText;
+export default class Win extends Phaser.Scene {
+  private Win: Phaser.GameObjects.BitmapText;
   private otherintro: Phaser.GameObjects.BitmapText;
   private restart: Phaser.GameObjects.BitmapText;
   private bgEnd: Phaser.GameObjects.Image;
 
   constructor() {
     super({
-      key: "GameOver",
+      key: "Win",
     });
   }
 
@@ -19,8 +19,8 @@ export default class GameOver extends Phaser.Scene {
   }
 
   async create() {
-    this.GameOver = this.add
-      .bitmapText(1280 / 2, 100, "arcade", "Hai perso!", 60)
+    this.Win = this.add
+      .bitmapText(1280 / 2, 100, "arcade", "Hai Vinto!", 60)
       .setAlpha(1)
       .setOrigin(0)
       .setDepth(1001)
@@ -38,7 +38,7 @@ export default class GameOver extends Phaser.Scene {
       });
 
     this.restart = this.add
-      .bitmapText(1280 / 2, 600 / 2, "arcade", "Rigioca")
+      .bitmapText(1280 / 2, 600 / 2, "arcade", "Livello successivo!")
       .setAlpha(1)
       .setOrigin(0.5)
       .setInteractive()
@@ -46,7 +46,7 @@ export default class GameOver extends Phaser.Scene {
       .setTint(0xff8200)
       .on("pointerup", async () => {
         this.restart.removeInteractive();
-        this.restartGame();
+        this.nextLevel();
       })
       .on("pointerover", () => {
         this.restart.setTint(0xff0000);
@@ -57,14 +57,14 @@ export default class GameOver extends Phaser.Scene {
   }
 
   async intro() {
-    this.scene.stop("GameOver");
+    this.scene.stop("Win");
     this.scene.start("Intro");
   }
 
-  async restartGame() {
-    this.scene.stop("GameOver");
-    this.scene.start("GamePlay");
-    this.scene.bringToTop("GamePlay");
+  async nextLevel() {
+    this.scene.stop("Win");
+    this.scene.start("GamePlay2");
+    this.scene.bringToTop("GamePlay2");
     this.scene.start("Hud");
     this.scene.bringToTop("Hud");
   }
